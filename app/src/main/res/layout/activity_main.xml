@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="0.5"
+        android:background="@color/lightGreen"
+        android:onClick="openGallery"
+        android:text="@string/select_video_from_gallery"
+        android:textAllCaps="false"
+        android:textColor="#fff" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="0.5"
+        android:background="#F44336"
+        android:onClick="captureVideo1"
+        android:text="@string/capture_10_second_video"
+        android:textAllCaps="false"
+        android:textColor="#fff" />
+
+</LinearLayout>
