@@ -9,14 +9,14 @@ public class VideoDuration {
     public static long getDuration(Activity activity, Uri uri) {
         long duration = 0L;
         Cursor cursor = MediaStore.Video.query(activity.getContentResolver(), uri,
-                new String[] { MediaStore.Video.VideoColumns.DURATION });
+                new String[]{MediaStore.Video.VideoColumns.DURATION});
         if (cursor != null) {
             cursor.moveToFirst();
             duration = cursor.getLong(cursor.getColumnIndex(MediaStore.Video.VideoColumns.DURATION));
             cursor.close();
         }
 
-        return  duration;
+        return duration;
     }
 
     public static String convertMillieToHMmSs(long millie) {
@@ -27,9 +27,8 @@ public class VideoDuration {
 
         if (hour > 0) {
             return String.format("%02d:%02d:%02d", hour, minute, second);
-        }
-        else {
-            return String.format("%02d:%02d" , minute, second);
+        } else {
+            return String.format("%02d:%02d", minute, second);
         }
 
     }

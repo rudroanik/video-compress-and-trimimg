@@ -20,19 +20,18 @@ import com.example.viewgallery.R;
 import com.example.viewgallery.util.VideoDuration;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GridVideoAdapter extends BaseAdapter {
 
     private Activity context;
     private ArrayList<String> images;
     private ArrayList<Bitmap> image;
-    Bitmap thumb;
 
-
-    public GridVideoAdapter(Activity localContext, ArrayList<String> images,ArrayList<Bitmap> image) {
+    public GridVideoAdapter(Activity localContext, ArrayList<String> images, ArrayList<Bitmap> image) {
         context = localContext;
         this.images = images;
-        this.image= image;
+        this.image = image;
 
     }
 
@@ -58,13 +57,11 @@ public class GridVideoAdapter extends BaseAdapter {
         View view = LayoutInflater.from(context).inflate(R.layout.item_grid_video, parent, false);
 
         imageView = view.findViewById(R.id.videoThumbnailIVID);
-        TextView textView = view.findViewById(R.id.durationTVID);
 
 
         Glide.with(context).load(image)
-                .placeholder(R.drawable.test).centerCrop()
+                .placeholder(R.drawable.no_video).centerCrop()
                 .into(imageView);
-
 
 
         return view;

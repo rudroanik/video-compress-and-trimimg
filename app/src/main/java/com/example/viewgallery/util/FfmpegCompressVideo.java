@@ -16,7 +16,7 @@ import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunnin
 
 import java.io.File;
 
-public class CompressVideo {
+public class FfmpegCompressVideo {
 
     private static String filePath;
 
@@ -45,6 +45,7 @@ public class CompressVideo {
 
         return filePath;
     }
+
     private static void execFFmpegBinary(final String[] command, FFmpeg fFmpeg, final ProgressDialog progressDialog) {
         try {
             fFmpeg.execute(command, new ExecuteBinaryResponseHandler() {

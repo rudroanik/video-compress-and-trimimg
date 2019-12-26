@@ -32,6 +32,7 @@ import com.example.viewgallery.util.VideoDuration;
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
+
 import java.io.File;
 import java.net.URISyntaxException;
 
@@ -39,10 +40,10 @@ import java.net.URISyntaxException;
 public class VideoRecoderActivity extends AppCompatActivity {
 
 
-     ImageView imageView;
-     TextView textView;
-     RelativeLayout relativeLayout;
-     Uri uri;
+    ImageView imageView;
+    TextView textView;
+    RelativeLayout relativeLayout;
+    Uri uri;
     public String filePath;
     private FFmpeg ffmpeg;
     ProgressDialog progressDialog;
@@ -61,10 +62,6 @@ public class VideoRecoderActivity extends AppCompatActivity {
         //loadFFMpegBinary();
 
 
-
-
-
-
     }
 
     public void captureVideo(View view) {
@@ -79,15 +76,15 @@ public class VideoRecoderActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 1 && resultCode == RESULT_OK){
-            if (data != null){
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            if (data != null) {
                 File moviesDir = Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_DCIM
                 );
 
                 String filePrefix = "compress_video";
                 String fileExtn = ".mp4";
-                 yourRealPath = FilePath.getPath(this, data.getData());
+                yourRealPath = FilePath.getPath(this, data.getData());
 
 
                 File dest = new File(moviesDir, filePrefix + fileExtn);
@@ -100,22 +97,27 @@ public class VideoRecoderActivity extends AppCompatActivity {
                 filePath = dest.getAbsolutePath();
                 relativeLayout.setVisibility(View.VISIBLE);
                 uri = data.getData();
-                Glide.with(this).load(getImageThumbnail(this,uri)).placeholder(R.drawable.test).into(imageView);
-                textView.setText(VideoDuration.convertMillieToHMmSs(VideoDuration.getDuration(this,uri)));
+                Glide.with(this).load(getImageThumbnail(this, uri)).placeholder(R.drawable.test).into(imageView);
+                textView.setText(VideoDuration.convertMillieToHMmSs(VideoDuration.getDuration(this, uri)));
                 progressDialog.setMessage("Please wait");
                 progressDialog.show();
                 new VideoCompressor().execute();
-               // filePath = CompressVideo.executeCompressCommand(this,uri,ffmpeg,progressDialog);
+
+                // FfmpegCompressVideo.executeCompressCommand is use for ffmpeg video compression
+
+                // filePath = FfmpegCompressVideo.executeCompressCommand(this,uri,ffmpeg,progressDialog);
             }
 
         }
     }
 
+    // Capture image from the video
+
     public String getImageThumbnail(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
-            String[] proj = { MediaStore.Images.Media.DATA };
-            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            String[] proj = {MediaStore.Images.Media.DATA};
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
             return cursor.getString(column_index);
@@ -128,7 +130,7 @@ public class VideoRecoderActivity extends AppCompatActivity {
 
     public void playVideo(View view) {
 
-        startActivity(new Intent(VideoRecoderActivity.this,ViewVideoActivity.class).putExtra("videoUri",filePath));
+        startActivity(new Intent(VideoRecoderActivity.this, ViewVideoActivity.class).putExtra("videoUri", filePath));
     }
 
     private class VideoCompressor extends AsyncTask<Void, Void, Boolean> {
@@ -154,11 +156,6 @@ public class VideoRecoderActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
-
-
 
 
 }

@@ -30,4 +30,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public void openCustomGallery(View view) {
+        if (ReadExternalStoragePermission.isReadStoragePermissionGranted(this)){
+            startActivity(new Intent(MainActivity.this, GridVideoActivity.class));
+
+        }
+    }
 }

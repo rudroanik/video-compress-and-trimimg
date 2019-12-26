@@ -65,6 +65,8 @@ public class TrimActivity extends AppCompatActivity implements OnTrimVideoListen
         finish();
     }
 
+    // Compress video
+
     private class VideoCompressor extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected void onPreExecute() {

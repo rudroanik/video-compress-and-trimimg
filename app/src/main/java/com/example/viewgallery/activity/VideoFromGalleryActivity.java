@@ -42,7 +42,7 @@ public class VideoFromGalleryActivity extends AppCompatActivity {
     private VideoView videoView;
     private Uri uri;
     private Button trimButton;
-    boolean isLessThenTenSecond= false;
+    boolean isLessThenTenSecond = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class VideoFromGalleryActivity extends AppCompatActivity {
 
             startActivityForResult(Intent.createChooser(intent, "Select Video"), 2);
         } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -65,20 +66,18 @@ public class VideoFromGalleryActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode ==2 && resultCode == RESULT_OK){
-            if (data != null){
+        if (requestCode == 2 && resultCode == RESULT_OK) {
+            if (data != null) {
                 uri = data.getData();
 
                 videoView.setVideoURI(data.getData());
                 videoView.start();
 
-                if (VideoDuration.getDuration(VideoFromGalleryActivity.this,data.getData())> 10){
+                if (VideoDuration.getDuration(VideoFromGalleryActivity.this, data.getData()) > 10) {
 
                     isLessThenTenSecond = false;
 
-
-
-                }else {
+                } else {
 
                     trimButton.setVisibility(View.VISIBLE);
                     isLessThenTenSecond = true;
@@ -92,11 +91,11 @@ public class VideoFromGalleryActivity extends AppCompatActivity {
     }
 
     public void trimCompressVideo(View view) {
-        if (isLessThenTenSecond){
+        if (isLessThenTenSecond) {
             Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show();
 
-        }else {
-            startActivity(new Intent(VideoFromGalleryActivity.this,TrimActivity.class).putExtra("video", FileUtils.getPath(this,uri)));
+        } else {
+            startActivity(new Intent(VideoFromGalleryActivity.this, TrimActivity.class).putExtra("video", FileUtils.getPath(this, uri)));
 
         }
 
