@@ -28,26 +28,29 @@ public class GridVideoActivity extends AppCompatActivity {
 
     private GridView galleryVideo;
     private ArrayList<String> videos;
-    private ArrayList<Bitmap> imges;
+
     GridVideoAdapter adapter;
-    Bitmap thumb;
-    private ProgressBar progressBar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid_video);
         galleryVideo = findViewById(R.id.gridViewID);
-        progressBar = findViewById(R.id.progressBarId);
-        imges = new ArrayList<>();
         videos = new ArrayList<>();
         videos = getAllMedia();
-        new VideoCompressor().execute();
+        adapter = new GridVideoAdapter(GridVideoActivity.this, videos);
+        galleryVideo.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
         galleryVideo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(GridVideoActivity.this, videos.get(position), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(videos.get(position)));
+                intent.setDataAndType(Uri.parse(videos.get(position)), "video/mp4");
+                startActivity(intent);
 
             }
         });
@@ -72,31 +75,4 @@ public class GridVideoActivity extends AppCompatActivity {
         return downloadedList;
     }
 
-    private class VideoCompressor extends AsyncTask<Void, Void, List<Bitmap>> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected List<Bitmap> doInBackground(Void... voids) {
-            for (String s: videos){
-
-                thumb = ThumbnailUtils.createVideoThumbnail(s, MediaStore.Video.Thumbnails.MICRO_KIND);
-
-            }
-            imges.add(thumb);
-            return imges;
-        }
-
-        @Override
-        protected void onPostExecute(List<Bitmap> compressed) {
-            super.onPostExecute(compressed);
-            progressBar.setVisibility(View.GONE);
-            galleryVideo.setVisibility(View.VISIBLE);
-            adapter = new GridVideoAdapter(GridVideoActivity.this, videos,imges);
-            galleryVideo.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
-    }
 }

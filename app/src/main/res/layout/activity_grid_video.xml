@@ -11,13 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="3"
-        android:visibility="gone"
         android:layoutAnimation="@anim/layout_animation"
         android:layout_marginRight="5dp"/>
-    <ProgressBar
-        android:id="@+id/progressBarId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+
 
 </RelativeLayout>
