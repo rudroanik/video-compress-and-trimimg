@@ -14,7 +14,6 @@ import android.widget.VideoView;
 
 import com.example.viewgallery.R;
 
-import java.io.IOException;
 
 public class ViewVideoActivity extends AppCompatActivity {
 

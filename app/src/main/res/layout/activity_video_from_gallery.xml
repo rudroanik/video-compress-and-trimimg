@@ -17,34 +17,9 @@
             android:layout_height="300dp"
             android:layout_margin="5dp"/>
 
-        <TextView
-            android:id="@+id/startTimeTVID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/GalleryViewVideoID"
-            android:layout_marginLeft="10dp"
-            android:textColor="#000"
-            android:text="00:00"/>
 
-        <TextView
-            android:id="@+id/endTimeTVID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/GalleryViewVideoID"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:textColor="#000"
-            android:text="00:00"/>
     </RelativeLayout>
 
-
-
-    <org.florescu.android.rangeseekbar.RangeSeekBar
-        android:id="@+id/rangBarID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        rsb:activeColor="#ED1C24"
-        rsb:textAboveThumbsColor="#000000"/>
 
 
     <Button
@@ -54,7 +29,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:background="@color/lightGreen"
-        android:text="Trim &amp; Compress"
+        android:text="Trim Video"
         android:onClick="trimCompressVideo"
         android:textAllCaps="false"
         android:textColor="#fff"
